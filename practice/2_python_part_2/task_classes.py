@@ -28,33 +28,57 @@ PEP8 comply strictly.
 import datetime
 
 
+class Homework:
+    def __init__(self, task, deadline):
+        self.task = task
+        self.deadline = deadline
+        self.created = datetime.datetime.now()
+        self.status = False # False if not ended, True if completed
+
+    def is_active(self):
+        return self.status
+
+
 class Teacher:
-    ...
+    def __init__(self, first, last):
+        self.first_name = first
+        self.last_name = last
+
+    def create_homework(self, task, days):
+        deadline = datetime.datetime.now() + datetime.timedelta(days = days)
+        homework = Homework(task, deadline)
+        return homework
 
 
 class Student:
-    ...
+    def __init__(self, first, last):
+        self.last_name = last
+        self.first_name = first
 
-
-class Homework:
-    ...
+    def do_homework(self, homework: Homework):
+        if homework.deadline <= datetime.datetime.now():
+            homework.status = True
+            return homework
+        else:
+            print("You are late")
+            return None
 
 
 if __name__ == '__main__':
     teacher = Teacher('Dmitry', 'Orlyakov')
     student = Student('Vladislav', 'Popov')
-    teacher.last_name  # Daniil
-    student.first_name  # Petrov
+    print(teacher.last_name)  # Daniil
+    print(student.first_name)  # Petrov
 
     expired_homework = teacher.create_homework('Learn functions', 0)
-    expired_homework.created  # Example: 2019-05-26 16:44:30.688762
-    expired_homework.deadline  # 0:00:00
-    expired_homework.text  # 'Learn functions'
+    print(expired_homework.created)  # Example: 2019-05-26 16:44:30.688762
+    print(expired_homework.deadline)  # 0:00:00
+    print(expired_homework.task)  # 'Learn functions'
 
     # create function from method and use it
     create_homework_too = teacher.create_homework
     oop_homework = create_homework_too('create 2 simple classes', 5)
-    oop_homework.deadline  # 5 days, 0:00:00
+    print(oop_homework.deadline)  # 5 days, 0:00:00
 
     student.do_homework(oop_homework)
     student.do_homework(expired_homework)  # You are late
