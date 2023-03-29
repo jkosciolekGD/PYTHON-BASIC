@@ -21,4 +21,15 @@ def generate_words(n=20):
         word = ''.join(random.choices(string.ascii_lowercase, k=random.randint(3, 10)))
         words.append(word)
 
+    with open("files/file1.txt", mode="w", encoding="utf-8") as f:
+        f.write("\n".join(words))
+
+    with open("files/file2.txt", mode="w", encoding="cp1252") as f:
+        words.reverse()
+        f.write(", ".join(words))
+
     return words
+
+
+if __name__ == '__main__':
+    generate_words()
