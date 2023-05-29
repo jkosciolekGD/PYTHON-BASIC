@@ -16,19 +16,25 @@ Example:
 import os
 
 
-if __name__ == '__main__':
+def read_write(directory_to_input_files, output_file):
     text = []
 
     # I need to delete .DS file, because it is automatically created on macOs
-    os.remove('files/.DS_Store')
+    # os.remove('files/.DS_Store')
 
     # read
-    entries = os.listdir('files/')
+    entries = os.listdir(directory_to_input_files)
     for entry in entries:
-        with open(f'files/{entry}', 'r') as f:
+        with open(f'{directory_to_input_files}{entry}', 'r') as f:
             text.append(f.read())
 
     # write
-    with open('files/result.txt', 'x', encoding="utf-8") as f:
+    with open(output_file, 'w') as f:
         text_to_file = ', '.join(text)
         f.write(text_to_file)
+
+
+if __name__ == '__main__':
+    dir_to_input = 'files/'
+    otp_file = 'files/result.txt'
+    read_write(dir_to_input, otp_file)
