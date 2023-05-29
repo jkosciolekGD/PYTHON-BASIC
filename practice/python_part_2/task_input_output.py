@@ -41,4 +41,4 @@ def read_numbers(n: int) -> str:
 
 
 if __name__ == '__main__':
-    print(read_numbers(5))
+    print(read_numbers(4))
