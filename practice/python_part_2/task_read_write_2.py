@@ -32,4 +32,4 @@ def generate_words(n=20):
 
 
 if __name__ == '__main__':
-    generate_words()
+        generate_words()
