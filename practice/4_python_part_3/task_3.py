@@ -85,3 +85,15 @@ def test_with_http_domain_with_multiple_domain_level_with_a_slash():
     string = 'http://onet.com.pl/'
 
     assert is_http_domain(string) is True
+
+
+def test_with_https_domain_with_a_domain_namespace_at_the_beggining():
+    string = 'https://ru.wikipedia.org/'
+
+    assert is_http_domain(string) is True
+
+
+def test_with_http_domain_with_a_domain_namespace_at_the_beggining():
+    string = 'http://ru.wikipedia.org/'
+
+    assert is_http_domain(string) is True
