@@ -2,14 +2,24 @@
 Write a function that makes a request to some url
 using urllib. Return status code and decoded response data in utf-8
 Examples:
-     >>> make_request('https://www.google.com')
+     make_request('https://www.google.com')
      200, 'response data'
 """
+import pytest
+import requests
 from typing import Tuple
+from requests_mock import Mocker
 
 
 def make_request(url: str) -> Tuple[int, str]:
-    ...
+    response = requests.get(url)
+    code = response.status_code
+    content = response.text
+    return code, content
+
+
+# if __name__ == '__main__':
+#     print(make_request('https://www.google.com'))
 
 
 """
@@ -24,3 +34,16 @@ Example:
     >>> m.method2()
     b'some text'
 """
+
+
+def test_make_request():
+    expected_content = "Content"
+
+    with Mocker() as mocker:
+        url = "https://example.com"
+        mocker.get(url, text=expected_content)
+
+        code, content = make_request(url)
+
+        assert code == 200
+        assert content == expected_content
